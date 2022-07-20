@@ -54,16 +54,18 @@ class ImagesManager {
   static String lockIcon = "assets/svg/icons/lock_icon.svg";
   static String trashIcon = "assets/svg/icons/trash_icon.svg";
   // Change Password Screen Images:
-  static String lockPasswordIcon  = "assets/svg/icons/lock_password_icon.svg";
+  static String lockPasswordIcon = "assets/svg/icons/lock_password_icon.svg";
 
   // Profile Screen Images:
-  static String medal  = "assets/svg/profile/medal.svg";
-  static String editProfileIcon  = "assets/svg/icons/edit_profile_icon.svg";
-  static String watchingHoursIcon  = "assets/svg/icons/clock_icon.svg";
-  static String certificateIcon  = "assets/svg/icons/certificate_icon.svg";
+  static String medal = "assets/svg/profile/medal.svg";
+  static String editProfileIcon = "assets/svg/icons/edit_profile_icon.svg";
+  static String watchingHoursIcon = "assets/svg/icons/clock_icon.svg";
+  static String certificateIcon = "assets/svg/icons/certificate_icon.svg";
   static String certificateMedal = "assets/svg/icons/certificate_medal.svg";
   static String cloudBackupIcon = "assets/svg/icons/cloud_backup_icon.svg";
   static String seeIcon = "assets/svg/icons/see_icon.svg";
-  static String dummyEnrolledCourse = "assets/images/profile/dummy_enrolled_course.png";
-  static String favoriteFilledIcon = "assets/svg/icons/favorite_filled_icon.svg";
+  static String dummyEnrolledCourse =
+      "assets/images/profile/dummy_enrolled_course.png";
+  static String favoriteFilledIcon =
+      "assets/svg/icons/favorite_filled_icon.svg";
 }

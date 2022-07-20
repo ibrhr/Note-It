@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
+  // My Colors
+
+  static Color appBar = Colors.white12;
+
+  // Default
+
   static Color primary = HexColor.fromHex("#012548");
   static Color primaryOpacity = HexColor.fromHex("#888C9A");
   static Color primaryOpacity2 = HexColor.fromHex("#91A0AF").withOpacity(0.05);

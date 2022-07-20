@@ -1,11 +1,10 @@
 import 'package:notes/app/constants/exports.dart';
 
-// ignore: must_be_immutable
 class SearchBar extends StatelessWidget {
   final Function(String)? onSearch;
   SearchBar({Key? key, this.onSearch}) : super(key: key);
-
-  TextEditingController controller = TextEditingController();
+  final controller = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Container(

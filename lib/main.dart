@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'app/constants/exports.dart';
+import 'app/global_presentation/global_features/theme_manager.dart';
 import 'app/routes/app_pages.dart';
 
 void main() {
@@ -11,10 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: "Application",
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-    );
+    return ScreenUtilInit(builder: (BuildContext context, Widget? child) {
+      return GetMaterialApp(
+        title: 'Notes',
+        initialRoute: AppPages.INITIAL,
+        getPages: AppPages.routes,
+        theme: getDarkTheme(),
+        locale: const Locale('en'),
+        debugShowCheckedModeBanner: false,
+      );
+    });
   }
 }

@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-
+import 'package:notes/app/constants/exports.dart';
+import '../Widgets/my_appbar.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -9,16 +7,13 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
-    );
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        MyAppBar(),
+        PrimaryText('text'),
+      ],
+    ));
   }
 }

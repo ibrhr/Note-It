@@ -16,7 +16,8 @@ class MySeparator extends StatelessWidget {
         final dashHeight = height;
         final dashCount = (boxWidth / (2 * dashWidth)).floor();
         return Flex(
-          // ignore: sort_child_properties_last
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          direction: Axis.horizontal,
           children: List.generate(dashCount, (_) {
             return SizedBox(
               width: dashWidth,
@@ -26,8 +27,6 @@ class MySeparator extends StatelessWidget {
               ),
             );
           }),
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          direction: Axis.horizontal,
         );
       },
     );
