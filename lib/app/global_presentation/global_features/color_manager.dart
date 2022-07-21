@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ColorManager {
   // My Colors
 
-  static Color appBar = Colors.white12;
+  static Color appBar = ColorManager.grey8;
+  static Color icon = Colors.white10.withOpacity(1);
 
   // Default
 
@@ -19,7 +21,8 @@ class ColorManager {
   static Color darkGrey2 = HexColor.fromHex("#9F9F9F");
   static Color cardColor = HexColor.fromHex("#F9F9F9");
   static Color primaryOpacity70 = HexColor.fromHex("#B3ED9728");
-  static Color fontColor = HexColor.fromHex("#3B3B3B");
+  static Color fontColor =
+      Get.theme.textTheme.bodyLarge!.color!; // HexColor.fromHex("#3B3B3B");
   static Color fontColor2 = HexColor.fromHex("#262626");
   static Color fontColor3 = HexColor.fromHex("#555555");
   static Color fontColor4 = HexColor.fromHex("#5B5B5B");

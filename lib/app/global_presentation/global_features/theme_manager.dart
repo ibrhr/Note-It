@@ -36,6 +36,11 @@ ThemeData getDarkTheme() {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     hintColor: ColorManager.grey6,
 
+    // Text Theme
+    textTheme: TextTheme(bodyLarge: TextStyle(color: ColorManager.grey7)),
+
+    // Button Theme
+
     // App bar theme
     appBarTheme: AppBarTheme(
       color: ColorManager.scaffoldDarkColor,
