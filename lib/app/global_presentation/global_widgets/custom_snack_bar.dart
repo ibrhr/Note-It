@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constants/exports.dart';
+
 class CustomSnackBar {
   static showCustomSnackBar(
       {required String title, required String message, Duration? duration}) {
@@ -44,6 +46,7 @@ class CustomSnackBar {
       Duration? duration}) {
     Get.rawSnackbar(
       title: title,
+      messageText: Center(child: PrimaryText(message)),
       duration: duration ?? const Duration(seconds: 3),
       snackStyle: SnackStyle.GROUNDED,
       backgroundColor: color ?? Colors.green,
@@ -51,7 +54,7 @@ class CustomSnackBar {
         Get.closeAllSnackbars();
       },
       //overlayBlur: 0.8,
-      message: message,
+      // message: message,
     );
   }
 

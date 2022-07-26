@@ -1,9 +1,15 @@
-import 'package:hive/hive.dart';
-import 'package:notes/app/data/models/note_model/note.dart';
-import '../../../constants/exports.dart';
-import '../../../data/models/repositories/note_repo_implement.dart';
+import 'package:notes/app/data/models/repositories/note_repo_implement.dart';
 
-class HomeController extends GetxController {
+import '../../../constants/exports.dart';
+import '../../../data/models/note_model/note.dart';
+
+class AddNoteController extends GetxController {
+  Rx<Color> color = ColorManager.scaffoldDarkColor.obs;
+
+  void updateColor(Color color) {
+    this.color.value = color;
+  }
+
   Future<void> addNote(Note note) async {
     await NoteRepoImp().addNote(note);
   }
@@ -18,7 +24,6 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    Hive.openBox('notes');
     super.onInit();
   }
 
@@ -29,7 +34,6 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    Hive.close();
     super.onClose();
   }
 }
