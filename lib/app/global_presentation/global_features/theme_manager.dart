@@ -40,7 +40,10 @@ ThemeData getDarkTheme() {
     textTheme: TextTheme(bodyLarge: TextStyle(color: ColorManager.grey7)),
 
     // Button Theme
-
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (states) => ColorManager.scaffoldDarkColor))),
     // App bar theme
     appBarTheme: AppBarTheme(
       color: ColorManager.scaffoldDarkColor,

@@ -1,10 +1,13 @@
+import 'package:notes/app/modules/home/controllers/home_controller.dart';
+
 import '../../../constants/exports.dart';
 
-class MyAppBar extends StatelessWidget {
+class MyAppBar extends GetView<HomeController> {
   const MyAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
     return Column(
       children: [
         SizedBox(height: MediaQuery.of(context).padding.top),
@@ -21,7 +24,7 @@ class MyAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => controller.toggleDrawer(),
                   icon: Icon(
                     Icons.menu,
                     size: 24.w,
@@ -39,10 +42,14 @@ class MyAppBar extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.grid_view_outlined,
-                    size: 24.w,
+                  onPressed: () => controller.changeCrossAxis(),
+                  icon: GetBuilder<HomeController>(
+                    builder: (controller) => Icon(
+                      controller.crossAxisCellCount.value == 2
+                          ? Icons.view_comfy_sharp
+                          : Icons.view_agenda_outlined,
+                      size: 24.w,
+                    ),
                   ),
                   splashRadius: 24.w,
                 ),

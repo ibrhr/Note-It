@@ -13,6 +13,8 @@ class Note {
     this.image,
     this.title,
     this.date,
+    this.isArchived,
+    this.isDeleted = false,
   });
 
   final int? id;
@@ -31,4 +33,10 @@ class Note {
 
   @HiveField(5)
   final DateTime? date;
+
+  @HiveField(6)
+  final bool? isArchived;
+
+  @HiveField(7)
+  final bool? isDeleted;
 }

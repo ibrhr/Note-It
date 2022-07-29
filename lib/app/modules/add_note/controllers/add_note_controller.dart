@@ -1,10 +1,13 @@
-import 'package:notes/app/data/models/repositories/note_repo_implement.dart';
-
+import 'package:notes/app/modules/home/controllers/archived_controller.dart';
+import 'package:notes/app/modules/home/controllers/home_controller.dart';
 import '../../../constants/exports.dart';
-import '../../../data/models/note_model/note.dart';
+import '../../../data/models/notes/note_model/note.dart';
+import '../../../data/models/notes/repositories/note_repo_implement.dart';
 
 class AddNoteController extends GetxController {
   Rx<Color> color = ColorManager.scaffoldDarkColor.obs;
+
+  final homeController = Get.find<HomeController>();
 
   void updateColor(Color color) {
     this.color.value = color;
@@ -12,28 +15,17 @@ class AddNoteController extends GetxController {
 
   Future<void> addNote(Note note) async {
     await NoteRepoImp().addNote(note);
+    await homeController.fetchNotes();
   }
 
-  Future<void> deleteNote(Note note) async {
-    await NoteRepoImp().deleteNote(note);
-  }
+ 
 
   Future<void> updateNote(int oldNoteId, Note newNote) async {
     await NoteRepoImp().updateNote(oldNoteId, newNote);
+    await homeController.fetchNotes();
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> archiveNote(Note note) async {
+    await Get.find<ArchivedController>().archiveNote(note);
   }
 }

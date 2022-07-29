@@ -1,4 +1,4 @@
-import '../../data/models/note_model/note.dart';
+import '../../data/models/notes/note_model/note.dart';
 import '../add_note/views/add_note_view.dart';
 
 class HomeArguments {

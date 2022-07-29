@@ -6,6 +6,7 @@ class ColorManager {
 
   static Color appBar = ColorManager.grey8;
   static Color icon = Colors.white10.withOpacity(1);
+  static Color scaffoldDarkColor = HexColor.fromHex("#16202A");
 
   // Default
 
@@ -72,7 +73,7 @@ class ColorManager {
   static Color brown = HexColor.fromHex('#FCAA6A');
 
   // Dark Theme
-  static Color scaffoldDarkColor = HexColor.fromHex("#16202A");
+  // static Color scaffoldDarkColor = HexColor.fromHex("#16202A");
   static Color darkAccent = HexColor.fromHex("#080D11");
   static Color darkPrimary = HexColor.fromHex("#FFBA50");
   static Color darkShadowColor = HexColor.fromHex("#1F1F1F");

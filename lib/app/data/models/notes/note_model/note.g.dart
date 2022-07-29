@@ -22,13 +22,15 @@ class NoteAdapter extends TypeAdapter<Note> {
       image: fields[3] as Image?,
       title: fields[2] as String?,
       date: fields[5] as DateTime?,
+      isArchived: fields[6] as bool?,
+      isDeleted: fields[7] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Note obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(1)
       ..write(obj.text)
       ..writeByte(2)
@@ -38,7 +40,11 @@ class NoteAdapter extends TypeAdapter<Note> {
       ..writeByte(4)
       ..write(obj.color)
       ..writeByte(5)
-      ..write(obj.date);
+      ..write(obj.date)
+      ..writeByte(6)
+      ..write(obj.isArchived)
+      ..writeByte(7)
+      ..write(obj.isDeleted);
   }
 
   @override

@@ -1,16 +1,44 @@
+import 'package:flutter_zoom_drawer/config.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:notes/app/constants/exports.dart';
-import 'package:notes/app/data/models/note_model/note.dart';
+import 'package:notes/app/modules/home/Widgets/menu_screen.dart';
 import 'package:notes/app/routes/app_pages.dart';
 import '../Widgets/custom_floating_action_button.dart';
 import '../Widgets/my_appbar.dart';
+import '../Widgets/notes_grid.dart';
 import '../controllers/home_controller.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes/app/modules/home/Widgets/note_card.dart';
-import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
-import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: controller.fetchNotes(),
+      builder: (context, snapshot) => ZoomDrawer(
+        style: DrawerStyle.defaultStyle,
+        borderRadius: 24,
+        showShadow: true,
+        angle: 0.0,
+        mainScreenScale: 0.15,
+        menuBackgroundColor: ColorManager.appBar,
+        drawerShadowsBackgroundColor: Colors.grey[300]!,
+        slideWidth: MediaQuery.of(context).size.width * 0.65,
+        menuScreen: const MenuScreen(),
+        controller: controller.zoomDrawerController,
+        mainScreen: MainScreen(controller: controller),
+      ),
+    );
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +53,7 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           onTap: () {
-            Get.offNamed(Routes.ADD_NOTE)!
-                .then((value) => controller.addNote(value));
+            Get.offNamed(Routes.ADD_NOTE);
           },
         ),
         GestureDetector(
@@ -61,37 +88,21 @@ class HomeView extends GetView<HomeController> {
           children: [
             const MyAppBar(),
             Expanded(
-                child: ValueListenableBuilder<Box>(
-                    valueListenable: Hive.box('notes').listenable(),
-                    builder: (listenerContext, box, widget) {
-                      final box = Hive.box('notes');
-                      final length = box.length;
-                      final List<StaggeredTile> tiles = [];
-                      final List<NoteCard> cards = [];
-                      for (var i = 0; i < length; i++) {
-                        final tempNote = box.getAt(i) as Note;
-                        final note = Note(
-                            id: i,
-                            color: tempNote.color,
-                            title: tempNote.title,
-                            text: tempNote.text,
-                            date: tempNote.date,
-                            image: tempNote.image);
-                        tiles.add(const StaggeredTile.fit(2));
-                        cards.add(NoteCard(
-                          note: note,
-                        ));
-                      }
-                      return StaggeredGridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 4,
-                        staggeredTiles: tiles,
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,
-                        padding: const EdgeInsets.all(4),
-                        children: cards,
-                      );
-                    })),
+              // The Staggerred Tiles and Note Card widgets are built in the controller right after fetching the notes
+              child: GetBuilder<HomeController>(
+                builder: (c) => GetX<HomeController>(
+                  builder: (controller) {
+                    var cards = controller.cards;
+                    var tiles = controller.tiles;
+                    return NotesGrid(
+                      crossAxis: controller.crossAxisCellCount.value,
+                      cards: cards,
+                      tiles: tiles,
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

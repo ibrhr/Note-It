@@ -75,10 +75,11 @@ class _CustomFloatingActionButtonState
   getPosition() {
     RenderBox box = key.currentContext!.findRenderObject() as RenderBox;
     Offset position = box.localToGlobal(Offset.zero); //this is global position
+    // ignore: unused_local_variable
     double y = position.dy;
+    // ignore: unused_local_variable
     double x = position.dx;
-    print(x);
-    print(y);
+  
   }
 
   @override
