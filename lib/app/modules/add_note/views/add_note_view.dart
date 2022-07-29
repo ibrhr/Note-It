@@ -53,27 +53,32 @@ class AddNoteView extends GetView<AddNoteController> {
                     );
                   } else if (screenType == NoteType.addNote) {
                     final newNote = Note(
-                        text: text,
-                        title: title,
+                        text: text ?? '',
+                        title: title ?? '',
                         date: DateTime.now(),
                         color: color.value,
                         isArchived: false);
                     controller.addNote(newNote);
                     Get.back();
-                  } else if (screenType == NoteType.editNote &&
-                      !note!.isDeleted! &&
-                      !note.isArchived!) {
+                  } else if (!note!.isDeleted! && !note.isArchived!) {
                     final newNote = Note(
                       id: note.id,
                       image: note.image,
-                      text: text,
-                      title: title,
+                      text: text ?? '',
+                      title: title ?? '',
                       date: DateTime.now(),
                       color: color.value,
                       isArchived: note.isArchived,
                     );
                     controller.updateNote(note.id!, newNote);
                     Get.back();
+                  } else if (note.isDeleted!) {
+                    Get.back();
+                    CustomSnackBar.showCustomToast(
+                      message: 'Deleted note not updated',
+                      duration: const Duration(seconds: 2),
+                      color: ColorManager.appBar,
+                    );
                   } else {
                     Get.back();
                   }

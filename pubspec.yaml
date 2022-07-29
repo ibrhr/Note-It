@@ -22,6 +22,7 @@ dependencies:
   hive_flutter: ^1.1.0
   fast_color_picker: ^0.1.1
   flutter_zoom_drawer: ^3.0.3
+  search_page: ^2.0.0+1
 
 
 dev_dependencies: 

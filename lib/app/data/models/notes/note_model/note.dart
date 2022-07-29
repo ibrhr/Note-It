@@ -8,22 +8,22 @@ part 'note.g.dart';
 class Note {
   const Note({
     this.id,
-    this.text,
-    this.color,
+    required this.title,
+    required this.text,
+    required this.color,
     this.image,
-    this.title,
-    this.date,
-    this.isArchived,
+    required this.date,
+    required this.isArchived,
     this.isDeleted = false,
   });
 
   final int? id;
 
   @HiveField(1)
-  final String? text;
+  final String text;
 
   @HiveField(2)
-  final String? title;
+  final String title;
 
   @HiveField(3)
   final Image? image;

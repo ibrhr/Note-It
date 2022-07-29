@@ -18,16 +18,22 @@ class NotesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StaggeredGridView.count(
-      physics:
-          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      shrinkWrap: true,
-      crossAxisCount: crossAxis,
-      staggeredTiles: tiles,
-      mainAxisSpacing: 8,
-      crossAxisSpacing: 8,
-      padding: const EdgeInsets.all(4),
-      children: cards,
-    );
+    return crossAxis == 2
+        ? StaggeredGridView.count(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
+            shrinkWrap: true,
+            crossAxisCount: crossAxis,
+            staggeredTiles: tiles,
+            padding: const EdgeInsets.all(4),
+            children: cards,
+          )
+        : ListView(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(4),
+            children: cards,
+          );
   }
 }

@@ -17,10 +17,10 @@ class NoteAdapter extends TypeAdapter<Note> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Note(
-      text: fields[1] as String?,
+      title: fields[2] as String,
+      text: fields[1] as String,
       color: fields[4] as int?,
       image: fields[3] as Image?,
-      title: fields[2] as String?,
       date: fields[5] as DateTime?,
       isArchived: fields[6] as bool?,
       isDeleted: fields[7] as bool?,

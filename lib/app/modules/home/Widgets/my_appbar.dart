@@ -1,6 +1,10 @@
+import 'package:notes/app/modules/home/Widgets/note_card.dart';
+import 'package:notes/app/modules/home/Widgets/replica_note_card.dart';
 import 'package:notes/app/modules/home/controllers/home_controller.dart';
+import 'package:search_page/search_page.dart';
 
 import '../../../constants/exports.dart';
+import '../../../data/models/notes/note_model/note.dart';
 
 class MyAppBar extends GetView<HomeController> {
   const MyAppBar({Key? key}) : super(key: key);
@@ -32,12 +36,37 @@ class MyAppBar extends GetView<HomeController> {
                   splashRadius: 24.w,
                 ),
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: PrimaryText(
-                      'Search',
-                      color: Colors.white,
-                      fontSize: 14.h,
+                  child: InkWell(
+                    onTap: () => showSearch(
+                      context: context,
+                      delegate: SearchPage<Note>(
+                          items: controller.notes.entries
+                              .map((e) => e.value)
+                              .toList(),
+                          searchLabel: 'Search notes',
+                          suggestion: const Center(
+                            child: Text('Search notes'),
+                          ),
+                          failure: const Center(
+                            child: Text('No notes found :('),
+                          ),
+                          filter: (note) => [
+                                note.title,
+                                note.text,
+                              ],
+                          builder: (note) {
+                            return ReplicaNoteCard(
+                              note: note,
+                            );
+                          }),
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: PrimaryText(
+                        'Search',
+                        color: Colors.white,
+                        fontSize: 14.h,
+                      ),
                     ),
                   ),
                 ),
@@ -45,7 +74,7 @@ class MyAppBar extends GetView<HomeController> {
                   onPressed: () => controller.changeCrossAxis(),
                   icon: GetBuilder<HomeController>(
                     builder: (controller) => Icon(
-                      controller.crossAxisCellCount.value == 2
+                      controller.crossAxisCellCount.value != 2
                           ? Icons.view_comfy_sharp
                           : Icons.view_agenda_outlined,
                       size: 24.w,

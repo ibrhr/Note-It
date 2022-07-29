@@ -527,6 +527,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  search_page:
+    dependency: "direct main"
+    description:
+      name: search_page
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+1"
   shared_preferences:
     dependency: "direct main"
     description:

@@ -53,10 +53,15 @@ class NoteCard extends GetView<HomeController> {
         ),
       ),
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.ADD_NOTE,
-            arguments:
-                HomeArguments(screenType: NoteType.editNote, note: note)),
+        onTap: () =>
+            // note.isDeleted!
+            //      ? null
+            //   :
+            Get.toNamed(Routes.ADD_NOTE,
+                arguments:
+                    HomeArguments(screenType: NoteType.editNote, note: note)),
         child: Container(
+          margin: const EdgeInsets.all(8),
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -69,18 +74,18 @@ class NoteCard extends GetView<HomeController> {
               color: Color(note.color ?? ColorManager.scaffoldDarkColor.value)),
           child: Column(children: [
             note.image ?? Container(),
-            note.title != null
+            note.title != ''
                 ? Container(
                     padding: const EdgeInsets.all(8),
                     child: PrimaryText(
-                      note.title!,
+                      note.title,
                       fontSize: 15,
                     ))
                 : Container(),
-            note.text != null
+            note.text != ''
                 ? Container(
                     padding: const EdgeInsets.all(8),
-                    child: PrimaryText(note.text!))
+                    child: PrimaryText(note.text))
                 : Container(),
           ]),
         ),
