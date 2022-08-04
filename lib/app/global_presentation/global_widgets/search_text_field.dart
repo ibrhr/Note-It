@@ -4,7 +4,7 @@ import 'package:notes/app/constants/exports.dart';
 // import '../../generated/locales.g.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({
+     const SearchTextField({
     Key? key,
   }) : super(key: key);
 
@@ -61,7 +61,7 @@ class SearchTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        contentPadding: const EdgeInsets.fromLTRB(15.0, 10.0, 20.0, 10.0),
+        contentPadding:    const EdgeInsets.fromLTRB(15.0, 10.0, 20.0, 10.0),
       ),
     );
   }

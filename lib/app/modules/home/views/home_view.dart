@@ -2,6 +2,7 @@ import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:notes/app/constants/exports.dart';
 import 'package:notes/app/modules/home/Widgets/menu_screen.dart';
+import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
 import 'package:notes/app/routes/app_pages.dart';
 import '../Widgets/custom_floating_action_button.dart';
 import '../Widgets/my_appbar.dart';
@@ -13,15 +14,20 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsController = Get.find<SettingsController>();
+    print('page is dark : ${settingsController.isDarkMode}');
     return FutureBuilder(
       future: controller.fetchNotes(),
       builder: (context, snapshot) => ZoomDrawer(
         style: DrawerStyle.defaultStyle,
         borderRadius: 24,
+        isRtl: Get.locale! == const Locale('en') ? false : true,
         showShadow: true,
         angle: 0.0,
         mainScreenScale: 0.15,
-        menuBackgroundColor: ColorManager.appBar,
+        menuBackgroundColor: settingsController.isDarkMode
+            ? ColorManager.drawerDark
+            : ColorManager.drawerLight,
         drawerShadowsBackgroundColor: Colors.grey[300]!,
         slideWidth: MediaQuery.of(context).size.width * 0.65,
         menuScreen: const MenuScreen(),
@@ -42,14 +48,20 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settingsController = Get.find<SettingsController>();
+
     return CustomFloatingActionButton(
       options: [
         GestureDetector(
           child: CircleAvatar(
-            backgroundColor: ColorManager.appBar,
+            backgroundColor: settingsController.isDarkMode
+                ? ColorManager.appBarDark
+                : ColorManager.appBarLight,
             child: Icon(
               Icons.text_fields,
-              color: ColorManager.icon,
+              color: settingsController.isDarkMode
+                  ? ColorManager.iconDark
+                  : ColorManager.iconLight,
             ),
           ),
           onTap: () {
@@ -58,29 +70,48 @@ class MainScreen extends StatelessWidget {
         ),
         GestureDetector(
           child: CircleAvatar(
-              backgroundColor: ColorManager.appBar,
+              backgroundColor: settingsController.isDarkMode
+                  ? ColorManager.appBarDark
+                  : ColorManager.appBarLight,
               child: Icon(
                 Icons.photo,
-                color: ColorManager.icon,
+                color: settingsController.isDarkMode
+                    ? ColorManager.iconDark
+                    : ColorManager.iconLight,
               )),
           onTap: () {},
         ),
         GestureDetector(
           child: CircleAvatar(
-              backgroundColor: ColorManager.appBar,
+              backgroundColor: settingsController.isDarkMode
+                  ? ColorManager.appBarDark
+                  : ColorManager.appBarLight,
               child: Icon(
                 Icons.mic,
-                color: ColorManager.icon,
+                color: settingsController.isDarkMode
+                    ? ColorManager.iconDark
+                    : ColorManager.iconLight,
               )),
           onTap: () {},
         ),
       ],
       type: CustomFloatingActionButtonType.circular,
       spaceFromRight: 20,
-      floatinButtonColor: ColorManager.appBar,
-      // spaceFromBottom: 20,
-      openFloatingActionButton: const Icon(Icons.add, size: 30),
-      closeFloatingActionButton: const Icon(Icons.close, size: 30),
+      backgroundColor: Colors.black54,
+      openFloatingActionButton: Icon(
+        Icons.add,
+        size: 30.h,
+        color: settingsController.isDarkMode
+            ? ColorManager.iconDark
+            : ColorManager.iconLight,
+      ),
+      closeFloatingActionButton: Icon(
+        Icons.close,
+        size: 30.h,
+        color: settingsController.isDarkMode
+            ? ColorManager.iconDark
+            : ColorManager.iconLight,
+      ),
       body: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,12 +123,10 @@ class MainScreen extends StatelessWidget {
               child: GetBuilder<HomeController>(
                 builder: (c) => GetX<HomeController>(
                   builder: (controller) {
-                    var cards = controller.cards;
-                    var tiles = controller.tiles;
                     return NotesGrid(
                       crossAxis: controller.crossAxisCellCount.value,
-                      cards: cards,
-                      tiles: tiles,
+                      cards: controller.cards,
+                      tiles: controller.tiles,
                     );
                   },
                 ),

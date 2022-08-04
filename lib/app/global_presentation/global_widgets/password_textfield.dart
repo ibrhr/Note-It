@@ -78,8 +78,12 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               ),
               prefixIcon: Padding(
                 padding: EdgeInsets.only(
-                  right: Get.locale != const Locale("ar") ? 8.w : widget.leftOrRightPadding.w,
-                  left: Get.locale == const Locale("ar") ? 8.w : widget.leftOrRightPadding.w,
+                  right: Get.locale != const Locale("ar")
+                      ? 8.w
+                      : widget.leftOrRightPadding.w,
+                  left: Get.locale == const Locale("ar")
+                      ? 8.w
+                      : widget.leftOrRightPadding.w,
                 ),
                 child: Icon(
                   Icons.lock_outline,

@@ -1,6 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/exports.dart';
+import '../../modules/settings/controllers/settings_controller.dart';
 
 class PrimaryText extends StatelessWidget {
   final String text;
@@ -28,24 +29,28 @@ class PrimaryText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle style = TextStyle(
-      color: color ?? ColorManager.fontColor,
-      fontSize: (fontSize).sp,
-      fontWeight: fontWeight,
-      height: height,
-      decoration: lineThrow ? TextDecoration.lineThrough : TextDecoration.none,
-    );
-    return Text(
-      text.tr,
-      textAlign: textAlign,
-      overflow: overflow,
-      maxLines: maxLines,
-      textDirection: TextDirection.ltr,
-      style: Get.locale!.languageCode != 'ar'
-          ? GoogleFonts.poppins(textStyle: style)
-          : GoogleFonts.tajawal(
-              textStyle: style,
-            ),
-    );
+    return GetBuilder<SettingsController>(builder: (controller) {
+      TextStyle style = TextStyle(
+        color: color ??
+            (controller.isDarkMode ? Colors.white : ColorManager.black),
+        fontSize: (fontSize).sp,
+        fontWeight: fontWeight,
+        height: height,
+        decoration:
+            lineThrow ? TextDecoration.lineThrough : TextDecoration.none,
+      );
+      return Text(
+        text.tr,
+        textAlign: textAlign,
+        overflow: overflow,
+        maxLines: maxLines,
+        textDirection: TextDirection.ltr,
+        style: Get.locale!.languageCode != 'ar'
+            ? GoogleFonts.poppins(textStyle: style)
+            : GoogleFonts.tajawal(
+                textStyle: style,
+              ),
+      );
+    });
   }
 }

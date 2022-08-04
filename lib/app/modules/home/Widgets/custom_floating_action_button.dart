@@ -12,7 +12,7 @@ class CustomFloatingActionButton extends StatefulWidget {
   final Color? backgroundColor;
   final Color? floatinButtonColor;
 
-  const CustomFloatingActionButton({
+     const CustomFloatingActionButton({
     Key? key,
     required this.body,
     required this.openFloatingActionButton,
@@ -113,7 +113,7 @@ class _CustomFloatingActionButtonState
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: widget.floatinButtonColor ?? Colors.white,
-                boxShadow: const [
+                boxShadow:    const [
                   BoxShadow(
                     color: Colors.black54,
                     blurRadius: 1,

@@ -1,6 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../generated/locales.g.dart';
 import '../../constants/exports.dart';
 // import '../../generated/locales.g.dart';
 
@@ -23,7 +22,7 @@ class PrimaryTextField extends StatelessWidget {
   final double leftOrRightPadding;
   final int noOfLines;
 
-  const PrimaryTextField({
+     const PrimaryTextField({
     Key? key,
     this.hintText,
     required this.controller,
@@ -59,7 +58,7 @@ class PrimaryTextField extends StatelessWidget {
         SizedBox(height: 5.h),
         Container(
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            borderRadius:    const BorderRadius.all(Radius.circular(8.0)),
             color: ColorManager.white,
           ),
           child: TextFormField(
@@ -82,8 +81,8 @@ class PrimaryTextField extends StatelessWidget {
               prefixIcon: prefixIcon != null
                   ? Padding(
                       padding: EdgeInsets.only(
-                        right: Get.locale == const Locale("en") ? 8.w : 0.0,
-                        left: Get.locale == const Locale("ar") ? 8.w : 0.0,
+                        right: Get.locale ==    const Locale("en") ? 8.w : 0.0,
+                        left: Get.locale ==    const Locale("ar") ? 8.w : 0.0,
                       ),
                       child: prefixIcon,
                     )
@@ -92,7 +91,7 @@ class PrimaryTextField extends StatelessWidget {
               prefixIconConstraints: BoxConstraints(
                 minWidth: 25.w,
               ),
-              suffixIconConstraints: BoxConstraints(
+              suffixIconConstraints:BoxConstraints(
                 minWidth: 25.w,
               ),
               focusedBorder: focusedBorder,
@@ -108,15 +107,15 @@ class PrimaryTextField extends StatelessWidget {
                 borderSide: BorderSide(color: ColorManager.grey),
               ),
               contentPadding: EdgeInsets.only(
-                top: Get.locale != const Locale("ar")
+                top: Get.locale !=    const Locale("ar")
                     ? (multiLines!)
                         ? 20.h
                         : 2.h
                     : 8.h,
-                left: Get.locale != const Locale("ar")
+                left: Get.locale !=    const Locale("ar")
                     ? leftOrRightPadding.h
                     : 0.h,
-                right: Get.locale != const Locale("ar")
+                right: Get.locale !=    const Locale("ar")
                     ? 0.h
                     : leftOrRightPadding.h,
               ),
@@ -124,7 +123,7 @@ class PrimaryTextField extends StatelessWidget {
             validator: validator ??
                 (String? value) {
                   if (value!.length < 6) {
-                    return LocaleKeys.invalid_password.tr;
+                    return 'LocaleKeys.invalid_password.tr';
                   }
                   return null;
                 },

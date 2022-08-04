@@ -18,17 +18,19 @@ class ArchivedController extends GetxController {
     archivedTiles.clear();
     archivedCards.clear();
     archived.forEach((key, note) {
-      archivedTiles.add(const StaggeredTile.fit(1));
+      archivedTiles.add(   const StaggeredTile.fit(1));
       archivedCards.add(NoteCard(
         key: ValueKey<int>(note.id!),
         note: note,
       ));
     });
+    
   }
 
   Future<void> archiveNote(Note note) async {
     await NoteRepoImp().archiveNote(note);
     await homeController.fetchNotes();
     prep();
+    update();
   }
 }

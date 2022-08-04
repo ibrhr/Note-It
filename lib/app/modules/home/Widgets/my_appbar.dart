@@ -1,10 +1,9 @@
-import 'package:notes/app/modules/home/Widgets/note_card.dart';
-import 'package:notes/app/modules/home/Widgets/replica_note_card.dart';
+import 'package:notes/app/modules/home/Widgets/search_note_card.dart';
 import 'package:notes/app/modules/home/controllers/home_controller.dart';
 import 'package:search_page/search_page.dart';
-
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/note_model/note.dart';
+import '../../settings/controllers/settings_controller.dart';
 
 class MyAppBar extends GetView<HomeController> {
   const MyAppBar({Key? key}) : super(key: key);
@@ -22,16 +21,17 @@ class MyAppBar extends GetView<HomeController> {
             padding: const EdgeInsets.all(8),
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             decoration: BoxDecoration(
-                color: ColorManager.appBar,
+                color: Get.find<SettingsController>().isDarkMode
+                    ? ColorManager.appBarDark
+                    : ColorManager.appBarLight,
                 borderRadius: BorderRadius.all(Radius.circular(24.w))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   onPressed: () => controller.toggleDrawer(),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.menu,
-                    size: 24.w,
                   ),
                   splashRadius: 24.w,
                 ),
@@ -43,19 +43,19 @@ class MyAppBar extends GetView<HomeController> {
                           items: controller.notes.entries
                               .map((e) => e.value)
                               .toList(),
-                          searchLabel: 'Search notes',
-                          suggestion: const Center(
-                            child: Text('Search notes'),
+                          searchLabel: LocaleKeys.Search_notes.tr,
+                          suggestion: Center(
+                            child: PrimaryText(LocaleKeys.Search_notes.tr),
                           ),
-                          failure: const Center(
-                            child: Text('No notes found :('),
+                          failure: Center(
+                            child: PrimaryText(LocaleKeys.No_notes_found.tr),
                           ),
                           filter: (note) => [
                                 note.title,
                                 note.text,
                               ],
                           builder: (note) {
-                            return ReplicaNoteCard(
+                            return SearchNoteCard(
                               note: note,
                             );
                           }),
@@ -63,7 +63,7 @@ class MyAppBar extends GetView<HomeController> {
                     child: Container(
                       padding: const EdgeInsets.only(left: 8),
                       child: PrimaryText(
-                        'Search',
+                        LocaleKeys.Search.tr,
                         color: Colors.white,
                         fontSize: 14.h,
                       ),
@@ -77,7 +77,6 @@ class MyAppBar extends GetView<HomeController> {
                       controller.crossAxisCellCount.value != 2
                           ? Icons.view_comfy_sharp
                           : Icons.view_agenda_outlined,
-                      size: 24.w,
                     ),
                   ),
                   splashRadius: 24.w,

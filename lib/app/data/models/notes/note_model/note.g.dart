@@ -20,8 +20,8 @@ class NoteAdapter extends TypeAdapter<Note> {
       title: fields[2] as String,
       text: fields[1] as String,
       color: fields[4] as int?,
-      image: fields[3] as Image?,
-      date: fields[5] as DateTime?,
+      images: fields[3] as List<String>,
+      date: fields[5] as DateTime,
       isArchived: fields[6] as bool?,
       isDeleted: fields[7] as bool?,
     );
@@ -36,7 +36,7 @@ class NoteAdapter extends TypeAdapter<Note> {
       ..writeByte(2)
       ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.image)
+      ..write(obj.images)
       ..writeByte(4)
       ..write(obj.color)
       ..writeByte(5)

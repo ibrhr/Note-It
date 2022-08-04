@@ -4,9 +4,19 @@ import 'package:get/get.dart';
 class ColorManager {
   // My Colors
 
-  static Color appBar = ColorManager.grey8;
-  static Color icon = Colors.white10.withOpacity(1);
+  static Color appBarLight = grey11;
+
+  static Color appBarDark = grey8;
+
+  static Color iconLight = Colors.black;
+
+  static Color iconDark = Colors.black;
+
+  static Color scaffoldLightColor = grey6;
+
   static Color scaffoldDarkColor = HexColor.fromHex("#16202A");
+  static Color drawerLight = grey11;
+  static Color drawerDark = HexColor.fromHex("#010D18");
 
   // Default
 
@@ -55,7 +65,7 @@ class ColorManager {
   static Color grey9 = HexColor.fromHex('#F8F8F8');
   static Color grey10 = HexColor.fromHex('#F7F7F7');
   static Color grey11 = HexColor.fromHex('#A0A0A0');
-  static Color borderGrey = HexColor.fromHex('#EFEFEF');
+  static Color borderGrey = grey11; //HexColor.fromHex('#EFEFEF');
   static Color shadow = HexColor.fromHex('#4B545A');
   static Color bottomNavBarTitleGrey = HexColor.fromHex('#8B8989');
   static Color bottomNavBarIconGrey = HexColor.fromHex('#C3C5CC');

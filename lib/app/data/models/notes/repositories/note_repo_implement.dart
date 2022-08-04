@@ -1,3 +1,4 @@
+import 'package:deep_collection/deep_collection.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/app/data/models/notes/note_model/note.dart';
 import 'package:notes/app/data/models/notes/repositories/note_repo.dart';
@@ -23,7 +24,7 @@ class NoteRepoImp implements NoteRepo {
         title: tempNote.title,
         text: tempNote.text,
         date: tempNote.date,
-        image: tempNote.image,
+        images: tempNote.images,
         isArchived: tempNote.isArchived,
         isDeleted: tempNote.isDeleted,
       );
@@ -37,6 +38,9 @@ class NoteRepoImp implements NoteRepo {
         deleted[note.id!] = note;
       }
     }
+    notes = DeepMap(notes).deepReverse();
+    deleted = DeepMap(deleted).deepReverse();
+    archived = DeepMap(archived).deepReverse();
   }
 
   @override
@@ -59,7 +63,7 @@ class NoteRepoImp implements NoteRepo {
     Note newNote = Note(
         color: note.color,
         date: note.date,
-        image: note.image,
+        images: note.images,
         isArchived: note.isArchived,
         text: note.text,
         title: note.title,
@@ -72,7 +76,7 @@ class NoteRepoImp implements NoteRepo {
     Note newNote = Note(
         color: note.color,
         date: note.date,
-        image: note.image,
+        images: note.images,
         isArchived: !note.isArchived!,
         text: note.text,
         title: note.title,
@@ -85,7 +89,7 @@ class NoteRepoImp implements NoteRepo {
     Note newNote = Note(
         color: note.color,
         date: note.date,
-        image: note.image,
+        images: note.images,
         isArchived: note.isArchived,
         text: note.text,
         title: note.title,

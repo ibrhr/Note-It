@@ -4,7 +4,7 @@ import 'package:notes/app/modules/home/controllers/home_controller.dart';
 import '../Widgets/notes_grid.dart';
 
 class ArchivedView extends GetView<ArchivedController> {
-  const ArchivedView({Key? key}) : super(key: key);
+     const ArchivedView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,43 +15,38 @@ class ArchivedView extends GetView<ArchivedController> {
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top),
           Container(
-            padding: const EdgeInsets.all(8),
+            padding:    const EdgeInsets.all(8),
             height: 50,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 IconButton(
                   onPressed: () => Get.back(),
-                  icon: Icon(
+                  icon:    const Icon(
                     Icons.arrow_back,
-                    size: 22.w,
                   ),
                   splashRadius: 22.w,
                 ),
-                const SizedBox(width: 16),
-                const PrimaryText(
-                  'Archived Notes',
+                   const SizedBox(width: 16),
+                 PrimaryText(
+                  LocaleKeys.Archived_Notes.tr,
                   fontSize: 18,
                 ),
               ],
             ),
           ),
           Expanded(
-            // The Staggerred Tiles and Note Card widgets are built in the controller right after fetching the notes
-            child: GetBuilder<ArchivedController>(
-              builder: (c) => GetX<ArchivedController>(
-                builder: (controller) {
-                  controller.prep();
-                  var cards = controller.archivedCards;
-                  var tiles = controller.archivedTiles;
-                  return NotesGrid(
-                    crossAxis:
-                        Get.find<HomeController>().crossAxisCellCount.value,
-                    cards: cards,
-                    tiles: tiles,
-                  );
-                },
-              ),
+            child: GetX<ArchivedController>(
+              builder: (controller) {
+                // builds the widgets to be used
+                controller.prep();
+                return NotesGrid(
+                  crossAxis:
+                      Get.find<HomeController>().crossAxisCellCount.value,
+                  cards: controller.archivedCards,
+                  tiles: controller.archivedTiles,
+                );
+              },
             ),
           ),
         ],

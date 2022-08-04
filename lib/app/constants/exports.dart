@@ -8,5 +8,5 @@ export 'package:notes/app/global_presentation/global_features/font_manager.dart'
 export 'package:notes/app/global_presentation/global_features/images_manager.dart';
 export 'package:flutter/material.dart';
 export 'package:get/get.dart';
-//export 'package:notes/app/generated/locales.g.dart';
+export 'package:notes/generated/locales.g.dart';
 export 'package:flutter_svg/svg.dart';

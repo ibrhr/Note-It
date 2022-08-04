@@ -1,38 +1,45 @@
 import '../../constants/exports.dart';
 
-ThemeData getApplicationTheme() {
-  return ThemeData(
+class MyThemes {
+  static final light = ThemeData.light().copyWith(
     // main colors of the app
-    primaryColor: ColorManager.primary,
-    primaryColorLight: ColorManager.primaryOpacity70,
+    // primaryColor: ColorManager.primary,
+    //  primaryColorLight: ColorManager.primaryOpacity70,
     disabledColor: ColorManager.grey,
-    scaffoldBackgroundColor: ColorManager.white,
-    iconTheme: IconThemeData(color: ColorManager.fontColor, size: 20.h),
+    //   brightness: Brightness.light,
+    backgroundColor: ColorManager.scaffoldLightColor,
+    scaffoldBackgroundColor: ColorManager.scaffoldLightColor,
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    brightness: Brightness.light,
-    dividerColor: Colors.transparent,
-    unselectedWidgetColor: ColorManager.grey4,
-    platform: TargetPlatform.iOS,
+    hintColor: ColorManager.grey6,
+
+    // Text Theme
+    textTheme: TextTheme(bodyLarge: TextStyle(color: ColorManager.black)),
+
+    // Button Theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (states) => ColorManager.scaffoldLightColor))),
+
+    //Icon Theme
+    iconTheme: IconThemeData(color: ColorManager.black, size: 22.h),
+
     // App bar theme
     appBarTheme: AppBarTheme(
-      color: ColorManager.white,
-      iconTheme: IconThemeData(color: ColorManager.primary),
+      color: ColorManager.scaffoldLightColor,
+      iconTheme: IconThemeData(color: ColorManager.white),
       elevation: 0,
-      toolbarHeight: 70.h,
       centerTitle: true,
     ),
   );
-}
-
-ThemeData getDarkTheme() {
-  return ThemeData(
+  static final dark = ThemeData.dark().copyWith(
     // main colors of the app
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.primaryOpacity70,
     disabledColor: ColorManager.grey,
-    brightness: Brightness.dark,
+    //   brightness: Brightness.dark,
+    backgroundColor: ColorManager.scaffoldDarkColor,
     scaffoldBackgroundColor: ColorManager.scaffoldDarkColor,
-    iconTheme: IconThemeData(color: ColorManager.white, size: 20.h),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     hintColor: ColorManager.grey6,
 
@@ -44,6 +51,10 @@ ThemeData getDarkTheme() {
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith<Color>(
                 (states) => ColorManager.scaffoldDarkColor))),
+
+    //Icon Theme
+    iconTheme: IconThemeData(color: ColorManager.white, size: 22.h),
+
     // App bar theme
     appBarTheme: AppBarTheme(
       color: ColorManager.scaffoldDarkColor,

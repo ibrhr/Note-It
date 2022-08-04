@@ -4,7 +4,7 @@ import '../controllers/deleted_controller.dart';
 import '../controllers/home_controller.dart';
 
 class DeletedView extends GetView<DeletedController> {
-  const DeletedView({Key? key}) : super(key: key);
+     const DeletedView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,22 +15,21 @@ class DeletedView extends GetView<DeletedController> {
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top),
           Container(
-            padding: const EdgeInsets.all(8),
+            padding:    const EdgeInsets.all(8),
             height: 50,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 IconButton(
                   onPressed: () => Get.back(),
-                  icon: Icon(
+                  icon:    const Icon(
                     Icons.arrow_back,
-                    size: 22.w,
                   ),
                   splashRadius: 22.w,
                 ),
-                const SizedBox(width: 16),
-                const PrimaryText(
-                  'Deleted Notes',
+                   const SizedBox(width: 16),
+                PrimaryText(
+                  LocaleKeys.Deleted_Notes.tr,
                   fontSize: 18,
                 ),
               ],
@@ -38,20 +37,16 @@ class DeletedView extends GetView<DeletedController> {
           ),
           Expanded(
             // The Staggerred Tiles and Note Card widgets are built in the controller right after fetching the notes
-            child: GetBuilder<DeletedController>(
-              builder: (c) => GetX<DeletedController>(
-                builder: (controller) {
-                  controller.prep();
-                  var cards = controller.deletedCards;
-                  var tiles = controller.deletedTiles;
-                  return NotesGrid(
-                    crossAxis:
-                        Get.find<HomeController>().crossAxisCellCount.value,
-                    cards: cards,
-                    tiles: tiles,
-                  );
-                },
-              ),
+            child: GetX<DeletedController>(
+              builder: (controller) {
+                controller.prep();
+                return NotesGrid(
+                  crossAxis:
+                      Get.find<HomeController>().crossAxisCellCount.value,
+                  cards: controller.deletedCards,
+                  tiles: controller.deletedTiles,
+                );
+              },
             ),
           ),
         ],

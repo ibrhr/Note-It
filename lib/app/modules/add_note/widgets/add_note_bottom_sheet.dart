@@ -1,10 +1,12 @@
 import 'package:focused_menu/modals.dart';
 import 'package:intl/intl.dart';
+import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
 
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/note_model/note.dart';
 import '../../home/controllers/deleted_controller.dart';
 import '../controllers/add_note_controller.dart';
+import '../views/add_note_view.dart';
 import 'color_picker.dart';
 import 'my_focused_menu_holder.dart';
 
@@ -18,37 +20,60 @@ class AddNoteBottomSheet extends GetView<AddNoteController> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDeleted = controller.screenType == NoteType.editNote &&
+        controller.note!.isDeleted == true;
+    final settingsController = Get.find<SettingsController>();
     return Container(
+        height: 55.h,
         padding: const EdgeInsets.all(8),
+        color: controller.color.value == Colors.transparent
+            ? Get.theme.backgroundColor
+            : controller.color.value,
         child: Row(
           children: [
-            MyFocusedMenuHolder(items: [
-              FocusedMenuItem(
-                  backgroundColor: ColorManager.appBar,
-                  title: const PrimaryText("Take photo"),
-                  trailingIcon: const Icon(Icons.camera_alt_outlined),
-                  onPressed: () {}),
-              FocusedMenuItem(
-                  backgroundColor: ColorManager.appBar,
-                  title: const PrimaryText("Add image"),
-                  trailingIcon: const Icon(Icons.image_outlined),
-                  onPressed: () {}),
-              FocusedMenuItem(
-                  backgroundColor: ColorManager.appBar,
-                  title: const PrimaryText("Recording"),
-                  trailingIcon: const Icon(Icons.mic_none),
-                  onPressed: () {}),
-            ], child: const Icon(Icons.add_box_outlined)),
+            !isDeleted
+                ? MyFocusedMenuHolder(items: [
+                    FocusedMenuItem(
+                        backgroundColor: settingsController.isDarkMode
+                            ? ColorManager.appBarDark
+                            : ColorManager.appBarLight,
+                        title: PrimaryText(LocaleKeys.Take_photo.tr),
+                        trailingIcon: const Icon(Icons.camera_alt_outlined),
+                        onPressed: () {
+                          controller.takeImage();
+                        }),
+                    FocusedMenuItem(
+                        backgroundColor: settingsController.isDarkMode
+                            ? ColorManager.appBarDark
+                            : ColorManager.appBarLight,
+                        title: PrimaryText(LocaleKeys.Add_image.tr),
+                        trailingIcon: const Icon(Icons.image_outlined),
+                        onPressed: () {
+                          controller.pickImage();
+                        }),
+                    FocusedMenuItem(
+                        backgroundColor: settingsController.isDarkMode
+                            ? ColorManager.appBarDark
+                            : ColorManager.appBarLight,
+                        title: PrimaryText(LocaleKeys.Recording.tr),
+                        trailingIcon: const Icon(Icons.mic_none),
+                        onPressed: () {}),
+                  ], child: const Icon(Icons.add_box_outlined))
+                : Icon(
+                    Icons.add_box_outlined,
+                    color: Get.theme.disabledColor,
+                  ),
             IconButton(
-                onPressed: () =>
-                    Get.bottomSheet(const ColorPicker()).then((value) {
-                      if (value != null) controller.updateColor(value);
-                    }),
+                onPressed: !isDeleted
+                    ? () => Get.bottomSheet(const ColorPicker()).then((value) {
+                          if (value != null) controller.updateColor(value);
+                        })
+                    : null,
                 icon: const Icon(Icons.color_lens)),
             Expanded(
               child: PrimaryText(
                   textAlign: TextAlign.center,
-                  'Edited   ${DateFormat.Md().format(note == null ? DateTime.now() : note!.date!)}'),
+                  '${LocaleKeys.Edited.tr}  ${DateFormat.Md().format(note == null ? DateTime.now() : note!.date)}'),
             ),
             const CircleAvatar(
               radius: 24,
@@ -59,9 +84,11 @@ class AddNoteBottomSheet extends GetView<AddNoteController> {
                 ? MyFocusedMenuHolder(
                     items: [
                       FocusedMenuItem(
-                        backgroundColor: ColorManager.appBar,
-                        title: const PrimaryText(
-                          "Restore",
+                        backgroundColor: settingsController.isDarkMode
+                            ? ColorManager.appBarDark
+                            : ColorManager.appBarLight,
+                        title: PrimaryText(
+                          LocaleKeys.Restore.tr,
                         ),
                         trailingIcon: const Icon(
                           Icons.restore_outlined,
@@ -72,8 +99,10 @@ class AddNoteBottomSheet extends GetView<AddNoteController> {
                         },
                       ),
                       FocusedMenuItem(
-                        backgroundColor: ColorManager.appBar,
-                        title: const PrimaryText("Delete Forever",
+                        backgroundColor: settingsController.isDarkMode
+                            ? ColorManager.appBarDark
+                            : ColorManager.appBarLight,
+                        title: PrimaryText(LocaleKeys.Delete_Forever.tr,
                             color: Colors.red),
                         trailingIcon: const Icon(Icons.delete_outlined,
                             color: Colors.red),

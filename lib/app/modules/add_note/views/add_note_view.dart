@@ -1,7 +1,6 @@
+import 'dart:io';
+
 import 'package:notes/app/constants/exports.dart';
-import 'package:notes/app/modules/home/home_args.dart';
-import '../../../data/models/notes/note_model/note.dart';
-import '../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../controllers/add_note_controller.dart';
 import '../widgets/add_note_bottom_sheet.dart';
 
@@ -14,135 +13,166 @@ class AddNoteView extends GetView<AddNoteController> {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle titleStyle = TextStyle(fontSize: 24);
-    const TextStyle textStyle = TextStyle(fontSize: 16);
+    TextStyle titleStyle = TextStyle(fontSize: 24.w);
+    TextStyle textStyle = TextStyle(fontSize: 16.w);
+    final bool isDeleted = controller.screenType == NoteType.editNote &&
+        controller.note!.isDeleted == true;
 
-    String? title;
-    String? text;
-
-    var screenType = NoteType.addNote;
-
-    Note? note;
-
-    // Determining Screen type
-    if (Get.arguments != null) {
-      final args = Get.arguments as HomeArguments;
-      note = args.note;
-      title = note.title;
-      text = note.text;
-      controller.color.value = Color(note.color!);
-      screenType = NoteType.editNote;
-    }
-
-    return GetX<AddNoteController>(
-      builder: (controller) {
-        var color = controller.color.value;
-        return Scaffold(
-          backgroundColor: color,
-          appBar: AppBar(
-            backgroundColor: color,
-            automaticallyImplyLeading: false,
-            leading: IconButton(
-                onPressed: () {
-                  if (title == null && text == null) {
-                    Get.back();
-                    CustomSnackBar.showCustomToast(
-                      message: 'Empty note discarded',
-                      duration: const Duration(seconds: 2),
-                      color: ColorManager.appBar,
-                    );
-                  } else if (screenType == NoteType.addNote) {
-                    final newNote = Note(
-                        text: text ?? '',
-                        title: title ?? '',
-                        date: DateTime.now(),
-                        color: color.value,
-                        isArchived: false);
-                    controller.addNote(newNote);
-                    Get.back();
-                  } else if (!note!.isDeleted! && !note.isArchived!) {
-                    final newNote = Note(
-                      id: note.id,
-                      image: note.image,
-                      text: text ?? '',
-                      title: title ?? '',
-                      date: DateTime.now(),
-                      color: color.value,
-                      isArchived: note.isArchived,
-                    );
-                    controller.updateNote(note.id!, newNote);
-                    Get.back();
-                  } else if (note.isDeleted!) {
-                    Get.back();
-                    CustomSnackBar.showCustomToast(
-                      message: 'Deleted note not updated',
-                      duration: const Duration(seconds: 2),
-                      color: ColorManager.appBar,
-                    );
-                  } else {
-                    Get.back();
-                  }
-                },
-                icon: const Icon(Icons.arrow_back)),
-            actions: [
-              IconButton(
+    return WillPopScope(
+      onWillPop: () async {
+        controller.saveAndExit();
+        return true;
+      },
+      child: GetX<AddNoteController>(
+        builder: (controller) {
+          var color = controller.color.value;
+          return Scaffold(
+            backgroundColor:
+                color == Colors.transparent ? Get.theme.backgroundColor : color,
+            appBar: AppBar(
+              backgroundColor: color,
+              automaticallyImplyLeading: false,
+              leading: IconButton(
                   onPressed: () {
-                    if (note == null) {
-                    } else {
-                      controller.archiveNote(note);
-                      Get.back();
-                      CustomSnackBar.showCustomToast(
-                        message: note.isArchived!
-                            ? 'Note Unarchived'
-                            : 'Note Archived',
-                        duration: const Duration(seconds: 2),
-                        color: ColorManager.appBar,
-                      );
-                    }
+                    controller.saveAndExit();
                   },
-                  icon: Icon(note == null
-                      ? Icons.archive_outlined
-                      : (note.isArchived!
-                          ? Icons.unarchive_outlined
-                          : Icons.archive_outlined)))
-            ],
-          ),
-          body: Container(
-            padding: const EdgeInsets.all(8),
-            child: Form(
-              child: Column(
-                children: [
-                  TextFormField(
-                    style: titleStyle,
-                    maxLines: null,
-                    initialValue: title,
-                    onChanged: (value) => title = value,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Title',
-                      hintStyle: titleStyle,
-                    ),
+                  icon: const Icon(Icons.arrow_back)),
+              actions: [
+                !isDeleted || controller.note == null
+                    ? IconButton(
+                        onPressed: () {
+                          controller.save();
+                        },
+                        icon: const Icon(Icons.save_alt_outlined),
+                      )
+                    : Container(),
+                IconButton(
+                  onPressed: () async {
+                    await controller.archiveNote();
+                  },
+                  icon: Icon(
+                    controller.note == null
+                        ? Icons.archive_outlined
+                        : (controller.note!.isArchived!
+                            ? Icons.unarchive_outlined
+                            : Icons.archive_outlined),
                   ),
-                  Expanded(
-                    child: TextFormField(
-                      style: textStyle,
-                      initialValue: text,
-                      onChanged: (value) => text = value,
-                      maxLines: null,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Text',
-                        hintStyle: textStyle,
+                ),
+              ],
+            ),
+            body: Container(
+              margin: EdgeInsets.only(
+                bottom: 55.h,
+              ),
+              child: Form(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GetBuilder<AddNoteController>(builder: (controller) {
+                        return controller.images.isNotEmpty
+                            ? ConstrainedBox(
+                                constraints: BoxConstraints.loose(
+                                  Size(Get.width, Get.height - 300.h),
+                                ),
+                                child: ListView.separated(
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(width: 5),
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemCount: controller.images.length,
+                                  itemBuilder: (context, i) => InkWell(
+                                    onLongPress: () async =>
+                                        await Get.dialog(const Dialog()).then(
+                                            (value) => value
+                                                ? controller.deleteImage(i)
+                                                : null),
+                                    child: Image.file(
+                                      File(controller.images[i]),
+                                      fit: BoxFit.contain,
+                                      height: 100,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container();
+                      }),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: TextFormField(
+                          enabled: !isDeleted,
+                          style: titleStyle,
+                          maxLines: null,
+                          initialValue: controller.title,
+                          onChanged: (value) => controller.title = value,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: LocaleKeys.Title.tr,
+                            hintStyle: titleStyle,
+                          ),
+                        ),
                       ),
-                    ),
+                      Flexible(
+                        fit: FlexFit.loose,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            enabled: !isDeleted,
+                            style: textStyle,
+                            initialValue: controller.text,
+                            onChanged: (value) => controller.text = value,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: LocaleKeys.Text.tr,
+                              hintStyle: textStyle,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
+            bottomSheet: AddNoteBottomSheet(note: controller.note),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class Dialog extends StatelessWidget {
+  const Dialog({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: PrimaryText(
+        'Delete This Image ?',
+        fontSize: 16,
+      ),
+      actionsAlignment: MainAxisAlignment.spaceAround,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Get.back(result: true),
+          child: PrimaryText(
+            LocaleKeys.Yes.tr,
+            fontSize: 14,
+            color: Colors.red,
           ),
-          bottomSheet: AddNoteBottomSheet(note: note),
-        );
-      },
+        ),
+        ElevatedButton(
+          onPressed: () => Get.back(result: false),
+          child: PrimaryText(
+            LocaleKeys.No.tr,
+            fontSize: 14,
+          ),
+        ),
+      ],
     );
   }
 }

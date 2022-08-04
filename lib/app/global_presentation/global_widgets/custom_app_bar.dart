@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import '../../constants/exports.dart';
 import '../../modules/home/controllers/home_controller.dart';
+import '../../modules/settings/controllers/settings_controller.dart';
 
 class CustomAppBar extends GetView<HomeController> {
-  const CustomAppBar({
+     const CustomAppBar({
     Key? key,
     this.title,
     this.leading,
@@ -35,15 +36,14 @@ class CustomAppBar extends GetView<HomeController> {
                         color: ColorManager.grey6, shape: BoxShape.circle),
                     child: Icon(
                       Icons.arrow_back_rounded,
-                      color: (Get.isDarkMode)
+                      color: (Get.find<SettingsController>().isDarkMode)
                           ? ColorManager.white
                           : ColorManager.black.withOpacity(0.7),
-                      size: 25.w,
                     ),
                   ),
                 ),
             title ?? Container(),
-            action ?? const Text(""),
+            action ??    const Text(""),
           ],
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
 
 import '../../../constants/exports.dart';
 
@@ -20,7 +21,9 @@ class MyFocusedMenuHolder extends StatelessWidget {
       blurSize: 5.0,
       menuItemExtent: 45,
       menuBoxDecoration: BoxDecoration(
-          color: ColorManager.appBar,
+          color: Get.find<SettingsController>().isDarkMode
+              ? ColorManager.appBarDark
+              : ColorManager.appBarLight,
           borderRadius: const BorderRadius.all(Radius.circular(15.0))),
       duration: const Duration(milliseconds: 100),
       animateMenuItems: true,

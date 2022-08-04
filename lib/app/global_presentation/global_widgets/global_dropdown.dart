@@ -1,7 +1,7 @@
 import '../../constants/exports.dart';
 
 class PrimaryDropDown extends StatefulWidget {
-  const PrimaryDropDown({
+     const PrimaryDropDown({
     Key? key,
     required this.items,
     required this.hint,
@@ -34,7 +34,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
         contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       ),
       child: DropdownButton(
-          underline: const SizedBox.shrink(),
+          underline:    const SizedBox.shrink(),
           isExpanded: true,
           style: TextStyle(color: ColorManager.primary),
           hint: PrimaryText(

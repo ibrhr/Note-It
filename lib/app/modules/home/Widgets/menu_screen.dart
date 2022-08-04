@@ -1,5 +1,7 @@
 import 'package:notes/app/modules/home/controllers/home_controller.dart';
 import 'package:notes/app/modules/home/views/deleted_view.dart';
+import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
+import 'package:notes/app/modules/settings/views/settings_view.dart';
 import '../../../constants/exports.dart';
 import '../views/archived_view.dart';
 
@@ -9,7 +11,9 @@ class MenuScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.appBar,
+      backgroundColor: Get.find<SettingsController>().isDarkMode
+          ? ColorManager.drawerDark
+          : ColorManager.drawerLight,
       body: Container(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -19,17 +23,17 @@ class MenuScreen extends GetView<HomeController> {
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
+              children: const [
                 PrimaryText(
                   'Safe ',
                   fontSize: 26,
                   fontWeight: FontWeight.w400,
-                  color: Colors.indigo.shade400,
+                  // color: Colors.indigo.shade400,
                 ),
                 PrimaryText(
                   'Note',
                   fontSize: 24,
-                  color: Colors.indigo.shade300,
+                  //    color: Colors.indigo.shade300,
                 )
               ],
             ),
@@ -37,19 +41,19 @@ class MenuScreen extends GetView<HomeController> {
               child: ListView(
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  const ListTile(
-                    leading: Icon(Icons.lightbulb_outlined),
-                    contentPadding: EdgeInsets.all(16),
+                  ListTile(
+                    leading: const Icon(Icons.lightbulb_outlined),
+                    contentPadding: const EdgeInsets.all(16),
                     visualDensity: VisualDensity.compact,
-                    title: PrimaryText('Notes'),
+                    title: PrimaryText(LocaleKeys.Notes.tr),
                     isThreeLine: false,
-                    //  onTap: () => Get.off(() => const HomeView()),
+                    onTap: () => controller.closeDrawer(),
                   ),
                   ListTile(
                     leading: const Icon(Icons.archive_outlined),
                     contentPadding: const EdgeInsets.all(16),
                     visualDensity: VisualDensity.compact,
-                    title: const PrimaryText('Archive'),
+                    title: PrimaryText(LocaleKeys.Archive.tr),
                     isThreeLine: false,
                     onTap: () {
                       Get.to(() => const ArchivedView());
@@ -60,10 +64,21 @@ class MenuScreen extends GetView<HomeController> {
                     leading: const Icon(Icons.delete_outline),
                     contentPadding: const EdgeInsets.all(16),
                     visualDensity: VisualDensity.compact,
-                    title: const PrimaryText('Deleted'),
+                    title: PrimaryText(LocaleKeys.Deleted.tr),
                     isThreeLine: false,
                     onTap: () {
                       Get.to(() => const DeletedView());
+                      controller.closeDrawer();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.settings_outlined),
+                    contentPadding: const EdgeInsets.all(16),
+                    visualDensity: VisualDensity.compact,
+                    title: PrimaryText(LocaleKeys.Settings.tr),
+                    isThreeLine: false,
+                    onTap: () {
+                      Get.to(() => const SettingsView());
                       controller.closeDrawer();
                     },
                   ),

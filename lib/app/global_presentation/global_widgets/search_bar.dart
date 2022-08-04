@@ -4,7 +4,7 @@ class SearchBar extends StatelessWidget {
   final Function(String)? onSearch;
   SearchBar({Key? key, this.onSearch}) : super(key: key);
   final controller = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(

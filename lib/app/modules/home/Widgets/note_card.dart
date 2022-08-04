@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:notes/app/modules/add_note/views/add_note_view.dart';
 import 'package:notes/app/modules/home/controllers/deleted_controller.dart';
 import 'package:notes/app/modules/home/home_args.dart';
+import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
 import 'package:notes/app/routes/app_pages.dart';
 
 import '../../../constants/exports.dart';
@@ -18,24 +21,24 @@ class NoteCard extends GetView<HomeController> {
       confirmDismiss: (dir) async => await Get.dialog(AlertDialog(
         content: PrimaryText(
           note.isDeleted!
-              ? 'Are you sure you want to delete this note forever ?'
-              : 'Are you sure you want to delete this note ?',
+              ? LocaleKeys.confirm_forever.tr
+              : LocaleKeys.confirm.tr,
           fontSize: 16,
         ),
         actionsAlignment: MainAxisAlignment.spaceAround,
         actions: [
           ElevatedButton(
             onPressed: () => Get.back(result: true),
-            child: const PrimaryText(
-              'Yes',
+            child: PrimaryText(
+              LocaleKeys.Yes.tr,
               fontSize: 14,
               color: Colors.red,
             ),
           ),
           ElevatedButton(
             onPressed: () => Get.back(result: false),
-            child: const PrimaryText(
-              'No',
+            child: PrimaryText(
+              LocaleKeys.No.tr,
               fontSize: 14,
             ),
           ),
@@ -62,18 +65,26 @@ class NoteCard extends GetView<HomeController> {
                     HomeArguments(screenType: NoteType.editNote, note: note)),
         child: Container(
           margin: const EdgeInsets.all(8),
-          padding: const EdgeInsets.all(4),
+          //   padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
                 color: (note.color == null ||
-                        Color(note.color!) == ColorManager.scaffoldDarkColor)
+                        Color(note.color!) == Colors.transparent)
                     ? ColorManager.borderGrey
-                    : ColorManager.scaffoldDarkColor,
+                    : Get.find<SettingsController>().isDarkMode
+                        ? ColorManager.scaffoldDarkColor
+                        : ColorManager.scaffoldLightColor,
               ),
-              color: Color(note.color ?? ColorManager.scaffoldDarkColor.value)),
+              color: Color(note.color ?? Colors.transparent.value)),
           child: Column(children: [
-            note.image ?? Container(),
+            note.images.isNotEmpty
+                ? ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16)),
+                    child: Image.file(File(note.images[0])))
+                : Container(),
             note.title != ''
                 ? Container(
                     padding: const EdgeInsets.all(8),
@@ -81,7 +92,15 @@ class NoteCard extends GetView<HomeController> {
                       note.title,
                       fontSize: 15,
                     ))
-                : Container(),
+                : (note.text == ''
+                    // if both title and text are empty, to give the widget a proper shape
+                    ? Container(
+                        padding: const EdgeInsets.all(8),
+                        child: const PrimaryText(
+                          '',
+                          fontSize: 15,
+                        ))
+                    : Container()),
             note.text != ''
                 ? Container(
                     padding: const EdgeInsets.all(8),

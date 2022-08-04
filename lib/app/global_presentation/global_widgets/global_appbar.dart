@@ -1,4 +1,5 @@
 import 'package:notes/app/constants/exports.dart';
+import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
 
 AppBar globalAppBar({String? title, List<Widget>? actions, Widget? leading}) {
   return AppBar(
@@ -26,10 +27,9 @@ AppBar globalAppBar({String? title, List<Widget>? actions, Widget? leading}) {
                 color: ColorManager.grey6, shape: BoxShape.circle),
             child: Icon(
               Icons.arrow_back_rounded,
-              color: (Get.isDarkMode)
+              color: (Get.find<SettingsController>().isDarkMode)
                   ? ColorManager.white
                   : ColorManager.black.withOpacity(0.7),
-              size: 25.w,
             ),
           ),
         ),

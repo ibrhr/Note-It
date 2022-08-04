@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:notes/app/constants/exports.dart';
 
 part 'note.g.dart';
 
@@ -11,9 +9,9 @@ class Note {
     required this.title,
     required this.text,
     required this.color,
-    this.image,
+    this.images = const <String>[],
     required this.date,
-    required this.isArchived,
+     this.isArchived = false,
     this.isDeleted = false,
   });
 
@@ -26,13 +24,13 @@ class Note {
   final String title;
 
   @HiveField(3)
-  final Image? image;
+  final List<String> images;
 
   @HiveField(4)
   final int? color;
 
   @HiveField(5)
-  final DateTime? date;
+  final DateTime date;
 
   @HiveField(6)
   final bool? isArchived;

@@ -18,12 +18,13 @@ class DeletedController extends GetxController {
     deletedTiles.clear();
     deletedCards.clear();
     deleted.forEach((key, note) {
-      deletedTiles.add(const StaggeredTile.fit(1));
+      deletedTiles.add(   const StaggeredTile.fit(1));
       deletedCards.add(NoteCard(
         key: ValueKey<int>(note.id!),
         note: note,
       ));
     });
+   
   }
 
   Future<void> restoreNote(Note note) async {

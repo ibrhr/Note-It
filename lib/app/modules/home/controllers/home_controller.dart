@@ -37,7 +37,7 @@ class HomeController extends GetxController {
     await NoteRepoImp().fetchNotes();
     print(notes);
     notes.forEach((key, note) {
-      tiles.add(const StaggeredTile.fit(1));
+      tiles.add(   const StaggeredTile.fit(1));
       cards.add(NoteCard(
         key: ValueKey<int>(note.id!),
         note: note,
