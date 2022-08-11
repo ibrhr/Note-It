@@ -25,7 +25,7 @@ class AddNoteController extends GetxController {
     } else if (screenType == NoteType.takeImage) {
       await takeImage();
     } else if (note != null) {
-      images = note!.images;
+      images = note!.images.toList();
     }
     super.onInit();
   }
