@@ -1,13 +1,12 @@
 import 'dart:io';
 
-import 'package:notes/app/modules/add_note/views/add_note_view.dart';
-import 'package:notes/app/modules/home/controllers/deleted_controller.dart';
-import 'package:notes/app/modules/home/home_args.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
-import 'package:notes/app/routes/app_pages.dart';
-
+import 'package:note_it/app/modules/add_note/views/add_note_view.dart';
+import 'package:note_it/app/modules/home/controllers/deleted_controller.dart';
+import 'package:note_it/app/modules/home/home_args.dart';
+import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/note_model/note.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class NoteCard extends GetView<HomeController> {

@@ -1,4 +1,4 @@
-import 'package:notes/app/constants/exports.dart';
+import 'package:note_it/app/constants/exports.dart';
 
 class SearchBar extends StatelessWidget {
   final Function(String)? onSearch;

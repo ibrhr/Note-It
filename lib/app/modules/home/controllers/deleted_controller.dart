@@ -1,5 +1,5 @@
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
-import 'package:notes/app/data/models/notes/note_model/note.dart';
+import 'package:note_it/app/data/models/notes/note_model/note.dart';
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/repositories/note_repo_implement.dart';
 import '../Widgets/note_card.dart';
@@ -14,7 +14,6 @@ class DeletedController extends GetxController {
   var deletedCards = <NoteCard>[].obs;
 
   void prep() {
-    print('deleted : $deleted');
     deletedTiles.clear();
     deletedCards.clear();
     deleted.forEach((key, note) {

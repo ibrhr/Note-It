@@ -1,6 +1,6 @@
-import 'package:notes/app/constants/exports.dart';
-import 'package:notes/app/modules/home/controllers/archived_controller.dart';
-import 'package:notes/app/modules/home/controllers/home_controller.dart';
+import 'package:note_it/app/constants/exports.dart';
+import 'package:note_it/app/modules/home/controllers/archived_controller.dart';
+import 'package:note_it/app/modules/home/controllers/home_controller.dart';
 import '../Widgets/notes_grid.dart';
 
 class ArchivedView extends GetView<ArchivedController> {

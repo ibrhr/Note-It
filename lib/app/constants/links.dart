@@ -1,6 +1,6 @@
 class Links {
   static const String baseLink =
-      'https://wordpress-628142-2686778.cloudwaysapps.com/wp-json/ms_lms/v2';
+      'https://wordpress-628142-2686778.cloudwayspackage:note_it/apps.com/wp-json/ms_lms/v2';
   static const String login = '/login';
   static const String registerNewAccout = '/registration';
   static const String resetPassword = '/account/restore_password';

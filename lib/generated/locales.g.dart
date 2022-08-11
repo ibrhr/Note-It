@@ -49,6 +49,7 @@ class LocaleKeys {
   static const Language = 'Language';
   static const Arabic = 'Arabic';
   static const English = 'English';
+  static const Delete_Image = 'Delete_Image';
 }
 
 class Locales {
@@ -89,6 +90,7 @@ class Locales {
     'Language': 'اللغة',
     'Arabic': 'العربية',
     'English': 'الانجليزية',
+    'Delete_Image': 'حذف هذه الصورة ؟'
   };
   static const en = {
     'Take_photo': 'Take photo',
@@ -127,5 +129,6 @@ class Locales {
     'Language': 'Language',
     'Arabic': 'Arabic',
     'English': 'English',
+    'Delete_Image': 'Delete this image ?'
   };
 }

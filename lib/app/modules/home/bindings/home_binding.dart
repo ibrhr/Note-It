@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:notes/app/modules/home/controllers/archived_controller.dart';
-import 'package:notes/app/modules/home/controllers/deleted_controller.dart';
+import 'package:note_it/app/modules/home/controllers/archived_controller.dart';
+import 'package:note_it/app/modules/home/controllers/deleted_controller.dart';
 
 import '../../settings/controllers/settings_controller.dart';
 import '../controllers/home_controller.dart';

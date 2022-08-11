@@ -7,7 +7,8 @@ import '../modules/home/views/home_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
 
-part 'app_routes.dart';
+part 'package:note_it/app/routes/app_routes.dart';
+
 
 class AppPages {
   AppPages._();

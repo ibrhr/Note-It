@@ -1,6 +1,7 @@
 import '../note_model/note.dart';
 
 abstract class NoteRepo {
+  int get nextId;
   Future<void> fetchNotes();
   Future<void> addNote(Note note);
   Future<void> archiveNote(Note note);

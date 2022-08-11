@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:notes/app/data/netwrok_helper/strings.dart';
+import 'package:note_it/app/data/netwrok_helper/strings.dart';
 import 'package:get/get.dart' as getx;
 
 import '../../constants/links.dart';

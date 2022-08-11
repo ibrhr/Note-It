@@ -1,9 +1,11 @@
-import 'package:notes/app/modules/add_note/views/add_note_view.dart';
-import 'package:notes/app/modules/home/home_args.dart';
-import 'package:notes/app/routes/app_pages.dart';
+import 'dart:io';
+
+import 'package:note_it/app/modules/add_note/views/add_note_view.dart';
+import 'package:note_it/app/modules/home/home_args.dart';
 
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/note_model/note.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class SearchNoteCard extends GetView<HomeController> {
@@ -25,6 +27,18 @@ class SearchNoteCard extends GetView<HomeController> {
           ),
           color: Color(note.color ?? Colors.transparent.value)),
       child: ListTile(
+        leading: note.images.isNotEmpty
+            ? ClipRRect(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(4),
+                ),
+                child: Image.file(
+                  File(
+                    note.images[0],
+                  ),
+                  fit: BoxFit.fitHeight,
+                ))
+            : Container(width: 0),
         title: note.title != ''
             ? Container(
                 padding: const EdgeInsets.all(8),

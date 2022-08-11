@@ -1,10 +1,13 @@
 import 'package:deep_collection/deep_collection.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes/app/data/models/notes/note_model/note.dart';
-import 'package:notes/app/data/models/notes/repositories/note_repo.dart';
+import 'package:note_it/app/data/models/notes/note_model/note.dart';
+import 'package:note_it/app/data/models/notes/repositories/note_repo.dart';
 
 class NoteRepoImp implements NoteRepo {
   final box = Hive.box('notes');
+
+  @override
+  int get nextId => Hive.box('notes').length;
 
   static Map<int, Note> notes = {};
   static Map<int, Note> archived = {};

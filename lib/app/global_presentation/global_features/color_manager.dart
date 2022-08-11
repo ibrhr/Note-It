@@ -6,7 +6,7 @@ class ColorManager {
 
   static Color appBarLight = grey11;
 
-  static Color appBarDark = grey8;
+  static Color appBarDark = grey11;
 
   static Color iconLight = Colors.black;
 

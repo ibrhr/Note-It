@@ -1,9 +1,11 @@
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:notes/app/constants/exports.dart';
-import 'package:notes/app/modules/home/Widgets/menu_screen.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
-import 'package:notes/app/routes/app_pages.dart';
+import 'package:note_it/app/constants/exports.dart';
+import 'package:note_it/app/modules/add_note/views/add_note_view.dart';
+import 'package:note_it/app/modules/home/Widgets/menu_screen.dart';
+import 'package:note_it/app/modules/home/home_args.dart';
+import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
+import 'package:note_it/app/routes/app_pages.dart';
 import '../Widgets/custom_floating_action_button.dart';
 import '../Widgets/my_appbar.dart';
 import '../Widgets/notes_grid.dart';
@@ -15,7 +17,6 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final settingsController = Get.find<SettingsController>();
-    print('page is dark : ${settingsController.isDarkMode}');
     return FutureBuilder(
       future: controller.fetchNotes(),
       builder: (context, snapshot) => ZoomDrawer(
@@ -74,12 +75,18 @@ class MainScreen extends StatelessWidget {
                   ? ColorManager.appBarDark
                   : ColorManager.appBarLight,
               child: Icon(
-                Icons.photo,
+                Icons.camera_alt_rounded,
                 color: settingsController.isDarkMode
                     ? ColorManager.iconDark
                     : ColorManager.iconLight,
               )),
-          onTap: () {},
+          onTap: () {
+            Get.offNamed(
+              Routes.ADD_NOTE,
+              arguments:
+                  HomeArguments(screenType: NoteType.takeImage, note: null),
+            );
+          },
         ),
         GestureDetector(
           child: CircleAvatar(
@@ -87,17 +94,26 @@ class MainScreen extends StatelessWidget {
                   ? ColorManager.appBarDark
                   : ColorManager.appBarLight,
               child: Icon(
-                Icons.mic,
+                Icons.image_outlined,
                 color: settingsController.isDarkMode
                     ? ColorManager.iconDark
                     : ColorManager.iconLight,
               )),
-          onTap: () {},
+          onTap: () {
+            Get.offNamed(
+              Routes.ADD_NOTE,
+              arguments:
+                  HomeArguments(screenType: NoteType.addImage, note: null),
+            );
+          },
         ),
       ],
       type: CustomFloatingActionButtonType.circular,
       spaceFromRight: 20,
       backgroundColor: Colors.black54,
+      floatinButtonColor: settingsController.isDarkMode
+          ? ColorManager.appBarDark
+          : ColorManager.appBarLight,
       openFloatingActionButton: Icon(
         Icons.add,
         size: 30.h,

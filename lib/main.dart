@@ -1,7 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
-import 'package:notes/app/global_presentation/global_features/theme_manager.dart';
-import 'package:notes/app/modules/home/bindings/home_binding.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
+import 'app/global_presentation/global_features/theme_manager.dart';
+import 'app/modules/home/bindings/home_binding.dart';
+import 'app/modules/settings/controllers/settings_controller.dart';
 import 'app/constants/exports.dart';
 import 'app/data/models/notes/note_model/note.dart';
 import 'app/routes/app_pages.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         designSize: ScreenUtil.defaultSize,
         builder: (BuildContext context, Widget? child) {
           return GetMaterialApp(
-            title: 'Safe Note',
+            title: 'Note It',
             initialRoute: AppPages.INITIAL,
             getPages: AppPages.routes,
             theme: MyThemes.light,

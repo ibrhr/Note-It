@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:notes/app/constants/exports.dart';
+import 'package:note_it/app/constants/exports.dart';
+import '../../settings/controllers/settings_controller.dart';
 import '../controllers/add_note_controller.dart';
 import '../widgets/add_note_bottom_sheet.dart';
 
-enum NoteType { editNote, addNote }
+enum NoteType { editNote, addNote, addImage, takeImage }
 
 class AddNoteView extends GetView<AddNoteController> {
   const AddNoteView({
@@ -13,8 +14,16 @@ class AddNoteView extends GetView<AddNoteController> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle titleStyle = TextStyle(fontSize: 24.w);
-    TextStyle textStyle = TextStyle(fontSize: 16.w);
+    TextStyle titleStyle = TextStyle(
+        fontSize: 24.w,
+        color: Get.find<SettingsController>().isDarkMode
+            ? Colors.white
+            : ColorManager.black);
+    TextStyle textStyle = TextStyle(
+        fontSize: 16.w,
+        color: Get.find<SettingsController>().isDarkMode
+            ? Colors.white
+            : ColorManager.black);
     final bool isDeleted = controller.screenType == NoteType.editNote &&
         controller.note!.isDeleted == true;
 
@@ -26,6 +35,9 @@ class AddNoteView extends GetView<AddNoteController> {
       child: GetX<AddNoteController>(
         builder: (controller) {
           var color = controller.color.value;
+          final iconColor = Get.find<SettingsController>().isDarkMode
+              ? Colors.white
+              : ColorManager.black;
           return Scaffold(
             backgroundColor:
                 color == Colors.transparent ? Get.theme.backgroundColor : color,
@@ -36,14 +48,20 @@ class AddNoteView extends GetView<AddNoteController> {
                   onPressed: () {
                     controller.saveAndExit();
                   },
-                  icon: const Icon(Icons.arrow_back)),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: iconColor,
+                  )),
               actions: [
                 !isDeleted || controller.note == null
                     ? IconButton(
                         onPressed: () {
                           controller.save();
                         },
-                        icon: const Icon(Icons.save_alt_outlined),
+                        icon: Icon(
+                          Icons.save_alt_outlined,
+                          color: iconColor,
+                        ),
                       )
                     : Container(),
                 IconButton(
@@ -56,6 +74,7 @@ class AddNoteView extends GetView<AddNoteController> {
                         : (controller.note!.isArchived!
                             ? Icons.unarchive_outlined
                             : Icons.archive_outlined),
+                    color: iconColor,
                   ),
                 ),
               ],
@@ -152,7 +171,7 @@ class Dialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: PrimaryText(
-        'Delete This Image ?',
+        LocaleKeys.Delete_Image.tr,
         fontSize: 16,
       ),
       actionsAlignment: MainAxisAlignment.spaceAround,

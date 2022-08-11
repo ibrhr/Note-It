@@ -1,6 +1,6 @@
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
+import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
 
 import '../../../constants/exports.dart';
 

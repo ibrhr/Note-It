@@ -1,4 +1,4 @@
-name: notes
+name: note_it
 version: 1.0.0+1
 publish_to: none
 description: Notes app
@@ -24,9 +24,10 @@ dependencies:
   flutter_zoom_drawer: ^3.0.3
   search_page: ^2.0.0+1
   deep_collection: ^1.0.2
-  flutter_phoenix: ^1.0.0
-  flutter_switch: ^0.3.2
   image_picker: ^0.8.5+3
+  path_provider: ^2.0.11
+  path: ^1.8.1
+  flutter_launcher_icons: ^0.10.0
 
 
 dev_dependencies: 
@@ -35,6 +36,10 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.2.0 
   hive_generator: ^1.1.3
+
+flutter_icons:
+  android: "launcher_icon"
+  image_path: "assets/icon/icon.png" 
 
 flutter: 
   uses-material-design: true

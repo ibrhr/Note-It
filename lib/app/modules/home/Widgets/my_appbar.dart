@@ -1,9 +1,9 @@
-import 'package:notes/app/modules/home/Widgets/search_note_card.dart';
-import 'package:notes/app/modules/home/controllers/home_controller.dart';
+import '../controllers/home_controller.dart';
 import 'package:search_page/search_page.dart';
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/note_model/note.dart';
 import '../../settings/controllers/settings_controller.dart';
+import 'search_note_card.dart';
 
 class MyAppBar extends GetView<HomeController> {
   const MyAppBar({Key? key}) : super(key: key);

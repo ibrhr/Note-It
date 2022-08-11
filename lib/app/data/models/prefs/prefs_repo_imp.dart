@@ -1,4 +1,4 @@
-import 'package:notes/app/data/models/prefs/prefs_repo.dart';
+import 'package:note_it/app/data/models/prefs/prefs_repo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class PrefsRepoImp extends PrefsRepo {

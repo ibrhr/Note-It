@@ -1,5 +1,6 @@
-import 'package:notes/app/constants/exports.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
+import 'package:note_it/app/constants/exports.dart';
+import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
+
 
 AppBar globalAppBar({String? title, List<Widget>? actions, Widget? leading}) {
   return AppBar(

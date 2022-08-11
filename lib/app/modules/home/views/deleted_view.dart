@@ -1,4 +1,4 @@
-import 'package:notes/app/constants/exports.dart';
+import 'package:note_it/app/constants/exports.dart';
 import '../Widgets/notes_grid.dart';
 import '../controllers/deleted_controller.dart';
 import '../controllers/home_controller.dart';

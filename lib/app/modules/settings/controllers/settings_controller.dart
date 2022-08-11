@@ -1,5 +1,5 @@
-import 'package:notes/app/constants/exports.dart';
-import 'package:notes/app/data/models/prefs/prefs_repo_imp.dart';
+import 'package:note_it/app/constants/exports.dart';
+import 'package:note_it/app/data/models/prefs/prefs_repo_imp.dart';
 
 class SettingsController extends GetxController {
   String? get language => PrefsRepoImp.language;
@@ -22,7 +22,6 @@ class SettingsController extends GetxController {
       Get.changeThemeMode(ThemeMode.dark);
     }
     Get.forceAppUpdate();
-    print('Theme changed');
     await PrefsRepoImp().changeTheme(theme);
   }
 

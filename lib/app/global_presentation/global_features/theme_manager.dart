@@ -1,3 +1,4 @@
+import '../../modules/settings/controllers/settings_controller.dart';
 import '../../constants/exports.dart';
 
 class MyThemes {
@@ -63,9 +64,6 @@ class MyThemes {
       centerTitle: true,
     ),
   );
-}
 
-bool isDarkMoodEnabled() {
-  return Get.isDarkMode;
-  // return CacheController.instance.isDarkMode();
+  static bool get isDarkMode => Get.find<SettingsController>().isDarkMode;
 }

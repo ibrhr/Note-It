@@ -1,7 +1,7 @@
-import 'package:notes/app/modules/home/controllers/home_controller.dart';
-import 'package:notes/app/modules/home/views/deleted_view.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
-import 'package:notes/app/modules/settings/views/settings_view.dart';
+import 'package:note_it/app/modules/home/controllers/home_controller.dart';
+import 'package:note_it/app/modules/home/views/deleted_view.dart';
+import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
+import 'package:note_it/app/modules/settings/views/settings_view.dart';
 import '../../../constants/exports.dart';
 import '../views/archived_view.dart';
 
@@ -23,15 +23,16 @@ class MenuScreen extends GetView<HomeController> {
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
+              textDirection: TextDirection.ltr,
               children: const [
                 PrimaryText(
-                  'Safe ',
+                  'Note ',
                   fontSize: 26,
                   fontWeight: FontWeight.w400,
                   // color: Colors.indigo.shade400,
                 ),
                 PrimaryText(
-                  'Note',
+                  'It',
                   fontSize: 24,
                   //    color: Colors.indigo.shade300,
                 )
@@ -45,7 +46,10 @@ class MenuScreen extends GetView<HomeController> {
                     leading: const Icon(Icons.lightbulb_outlined),
                     contentPadding: const EdgeInsets.all(16),
                     visualDensity: VisualDensity.compact,
-                    title: PrimaryText(LocaleKeys.Notes.tr),
+                    title: PrimaryText(
+                      LocaleKeys.Notes.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     isThreeLine: false,
                     onTap: () => controller.closeDrawer(),
                   ),
@@ -53,7 +57,10 @@ class MenuScreen extends GetView<HomeController> {
                     leading: const Icon(Icons.archive_outlined),
                     contentPadding: const EdgeInsets.all(16),
                     visualDensity: VisualDensity.compact,
-                    title: PrimaryText(LocaleKeys.Archive.tr),
+                    title: PrimaryText(
+                      LocaleKeys.Archive.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     isThreeLine: false,
                     onTap: () {
                       Get.to(() => const ArchivedView());
@@ -64,7 +71,10 @@ class MenuScreen extends GetView<HomeController> {
                     leading: const Icon(Icons.delete_outline),
                     contentPadding: const EdgeInsets.all(16),
                     visualDensity: VisualDensity.compact,
-                    title: PrimaryText(LocaleKeys.Deleted.tr),
+                    title: PrimaryText(
+                      LocaleKeys.Deleted.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     isThreeLine: false,
                     onTap: () {
                       Get.to(() => const DeletedView());
@@ -75,7 +85,10 @@ class MenuScreen extends GetView<HomeController> {
                     leading: const Icon(Icons.settings_outlined),
                     contentPadding: const EdgeInsets.all(16),
                     visualDensity: VisualDensity.compact,
-                    title: PrimaryText(LocaleKeys.Settings.tr),
+                    title: PrimaryText(
+                      LocaleKeys.Settings.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     isThreeLine: false,
                     onTap: () {
                       Get.to(() => const SettingsView());

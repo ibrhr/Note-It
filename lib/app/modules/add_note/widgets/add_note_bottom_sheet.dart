@@ -1,6 +1,6 @@
 import 'package:focused_menu/modals.dart';
 import 'package:intl/intl.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
+import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
 
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/note_model/note.dart';
@@ -51,18 +51,12 @@ class AddNoteBottomSheet extends GetView<AddNoteController> {
                         onPressed: () {
                           controller.pickImage();
                         }),
-                    FocusedMenuItem(
-                        backgroundColor: settingsController.isDarkMode
-                            ? ColorManager.appBarDark
-                            : ColorManager.appBarLight,
-                        title: PrimaryText(LocaleKeys.Recording.tr),
-                        trailingIcon: const Icon(Icons.mic_none),
-                        onPressed: () {}),
                   ], child: const Icon(Icons.add_box_outlined))
                 : Icon(
                     Icons.add_box_outlined,
                     color: Get.theme.disabledColor,
                   ),
+            const SizedBox(width: 8),
             IconButton(
                 onPressed: !isDeleted
                     ? () => Get.bottomSheet(const ColorPicker()).then((value) {

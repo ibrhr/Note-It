@@ -1,8 +1,8 @@
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:hive/hive.dart';
-import 'package:notes/app/data/models/notes/note_model/note.dart';
-import 'package:notes/app/data/models/prefs/prefs_repo_imp.dart';
-import 'package:notes/app/modules/home/controllers/archived_controller.dart';
+import 'package:note_it/app/data/models/notes/note_model/note.dart';
+import 'package:note_it/app/data/models/prefs/prefs_repo_imp.dart';
+import 'package:note_it/app/modules/home/controllers/archived_controller.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 import '../../../constants/exports.dart';
 import '../../../data/models/notes/repositories/note_repo_implement.dart';
@@ -35,7 +35,6 @@ class HomeController extends GetxController {
     tiles.clear();
     cards.clear();
     await NoteRepoImp().fetchNotes();
-    print(notes);
     notes.forEach((key, note) {
       tiles.add(   const StaggeredTile.fit(1));
       cards.add(NoteCard(

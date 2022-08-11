@@ -1,4 +1,4 @@
-# notes
+# Note It
 
 Notes app
 

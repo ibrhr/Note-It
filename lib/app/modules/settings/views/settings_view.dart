@@ -1,6 +1,6 @@
-import 'package:notes/app/constants/exports.dart';
-import 'package:notes/app/global_presentation/global_widgets/global_dailog.dart';
-import 'package:notes/app/modules/settings/controllers/settings_controller.dart';
+import 'package:note_it/app/constants/exports.dart';
+import 'package:note_it/app/global_presentation/global_widgets/global_dailog.dart';
+import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({Key? key}) : super(key: key);
