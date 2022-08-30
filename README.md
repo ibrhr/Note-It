@@ -7,12 +7,4 @@ The user can switch between light and dark themes with the ability to switch bet
 
 
 ## Screenshots from the app 
-
-![alt text](https://lh3.googleusercontent.com/MJ2EdQVvDwRdBPWpObaQTP-Q-iXYJMau63h49ku0IHbQLu1nnY6dAPyOffth11SWu14=w2400)
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
+![]([https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png](https://lh3.googleusercontent.com/MJ2EdQVvDwRdBPWpObaQTP-Q-iXYJMau63h49ku0IHbQLu1nnY6dAPyOffth11SWu14=w2400) | width=100)
