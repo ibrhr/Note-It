@@ -7,4 +7,4 @@ The user can switch between light and dark themes with the ability to switch bet
 
 
 ## Screenshots from the app 
-![]([https://lh3.googleusercontent.com/MJ2EdQVvDwRdBPWpObaQTP-Q-iXYJMau63h49ku0IHbQLu1nnY6dAPyOffth11SWu14=w2400] | width=100)
+![alt text](https://lh3.googleusercontent.com/MJ2EdQVvDwRdBPWpObaQTP-Q-iXYJMau63h49ku0IHbQLu1nnY6dAPyOffth11SWu14=w2400)
