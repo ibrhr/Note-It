@@ -2,6 +2,7 @@ import 'package:note_it/app/constants/exports.dart';
 import 'package:note_it/app/modules/settings/controllers/settings_controller.dart';
 
 
+
 AppBar globalAppBar({String? title, List<Widget>? actions, Widget? leading}) {
   return AppBar(
     centerTitle: true,
@@ -13,7 +14,7 @@ AppBar globalAppBar({String? title, List<Widget>? actions, Widget? leading}) {
             title,
             fontSize: 21,
             color: ColorManager.primary,
-            fontWeight: FontWeightManager.medium,
+        //    fontWeight: FontWeightManager.medium,
           )
         : const SizedBox(),
     leading: leading ??

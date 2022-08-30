@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
       this.color,
       this.width,
       this.fontSize = 13,
-      this.fontWeight = FontWeightManager.bold,
+      this.fontWeight = FontWeight.normal,
       this.fontColor = Colors.white})
       : super(key: key);
 
